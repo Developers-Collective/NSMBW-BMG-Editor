@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import archive
 import sys
 import os, os.path
@@ -157,12 +159,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     def get_converted_txt(self):
-        with open(os.path.join('tmp', 'wii_mj2d.txt'), 'r') as file:
+        with open(os.path.join('tmp', 'wii_mj2d.txt'), 'r', encoding='utf-8') as file:
             txt = file.read()
         return txt
 
     def save_edited_txt(self):
-        with open(os.path.join('tmp', 'wii_mj2d.txt'), 'w') as file:
+        with open(os.path.join('tmp', 'wii_mj2d.txt'), 'w', encoding='utf-8') as file:
             file.write(self.textbox.toPlainText())
 
 

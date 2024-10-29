@@ -140,7 +140,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def convert_bmg_to_txt(self):
         import subprocess
-        child = subprocess.Popen('wbmgt DECODE --overwrite --no-bmg-inline --export --long --single-line '+os.path.join(os.getcwd(), 'tmp', 'wii_mj2d.bmg'), stdout=subprocess.PIPE)
+        child = subprocess.Popen('wbmgt DECODE --overwrite --no-bmg-inline --export --long --single-line "'+os.path.join(os.getcwd(), 'tmp', 'wii_mj2d.bmg')+'"', stdout=subprocess.PIPE)
         streamdata = child.communicate()[0]
         rc = child.returncode
         del subprocess
@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def convert_txt_to_bmg(self):
         import subprocess
-        child = subprocess.Popen('wbmgt ENCODE --overwrite '+os.path.join(os.getcwd(), 'tmp', 'wii_mj2d.txt'), stdout=subprocess.PIPE)
+        child = subprocess.Popen('wbmgt ENCODE --overwrite "'+os.path.join(os.getcwd(), 'tmp', 'wii_mj2d.txt')+'"', stdout=subprocess.PIPE)
         streamdata = child.communicate()[0]
         rc = child.returncode
         del subprocess

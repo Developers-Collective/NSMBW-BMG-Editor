@@ -99,6 +99,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setupWidgets()
 
+        self.openFile()
+
+    def openFile(self):
         self.arc_path = QtWidgets.QFileDialog.getOpenFileName(self, "Open Message.arc", '', "Message File (*.arc)")[0]
         if len(self.arc_path) == 0: sys.exit(0)
         self.get_bmg_from_message_arc(self.arc_path)
@@ -190,6 +193,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     def setupWidgets(self):
+        self.open = QtWidgets.QPushButton(self)
+        self.open.setText('Open File...')
+        self.open.released.connect(self.openFile)
+
         self.textbox = QtWidgets.QTextEdit(self)
         self.categoryBox = QtWidgets.QSpinBox(self)
         self.IDBox = QtWidgets.QSpinBox(self)
@@ -215,13 +222,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.save.released.connect(self.save_to_arc)
 
         layout = QtWidgets.QGridLayout()
-        layout.addWidget(self.textbox, 0, 0, 1, 5)
-        layout.addWidget(self.categoryBox, 1, 0)
-        layout.addWidget(self.IDBox, 1, 1)
-        layout.addWidget(self.convLeft, 1, 2)
-        layout.addWidget(self.convRight, 1, 3)
-        layout.addWidget(self.numberBox, 1, 4)
-        layout.addWidget(self.save, 2, 0, 1, 5)
+        layout.addWidget(self.open, 0, 0, 1, 1)
+        layout.addWidget(self.textbox, 1, 0, 1, 5)
+        layout.addWidget(self.categoryBox, 2, 0)
+        layout.addWidget(self.IDBox, 2, 1)
+        layout.addWidget(self.convLeft, 2, 2)
+        layout.addWidget(self.convRight, 2, 3)
+        layout.addWidget(self.numberBox, 2, 4)
+        layout.addWidget(self.save, 3, 0, 1, 5)
         self.widget = QtWidgets.QWidget()
         self.widget.setLayout(layout)
         self.setCentralWidget(self.widget)

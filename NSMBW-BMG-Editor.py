@@ -99,16 +99,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setupWidgets()
 
+        self.isFirstOpen = True
         self.openFile()
 
     def openFile(self):
         self.arc_path = QtWidgets.QFileDialog.getOpenFileName(self, "Open Message.arc", '', "Message File (*.arc)")[0]
-        if len(self.arc_path) == 0: sys.exit(0)
+        if len(self.arc_path) == 0:
+            if self.isFirstOpen: sys.exit(0)
+            else: return
         self.get_bmg_from_message_arc(self.arc_path)
         self.convert_bmg_to_txt()
         txt_messages = self.get_converted_txt()
         #txt_messages = '\n'.join(str(m) for m in messages.values())
         self.textbox.setText(txt_messages)
+        self.isFirstOpen = False
 
 
 

@@ -103,10 +103,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.openFile()
 
     def openFile(self):
-        self.arc_path = QtWidgets.QFileDialog.getOpenFileName(self, "Open Message.arc", '', "Message File (*.arc)")[0]
-        if len(self.arc_path) == 0:
-            if self.isFirstOpen: sys.exit(0)
-            else: return
+        new_arc_path = QtWidgets.QFileDialog.getOpenFileName(self, "Open Message.arc", '', "Message File (*.arc)")[0]
+        if len(new_arc_path) == 0: 
+            if self.isFirstOpen == True: # only close app if it's the first open
+                sys.exit(0)
+            else:
+                return
+        self.arc_path = new_arc_path
         self.get_bmg_from_message_arc(self.arc_path)
         self.convert_bmg_to_txt()
         txt_messages = self.get_converted_txt()
